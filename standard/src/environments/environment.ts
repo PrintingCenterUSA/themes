@@ -4,6 +4,6 @@
 
 export const environment = {
   production: false,
-	apiEndpoint: 'http://blogifier.net',
+	apiEndpoint: 'http://dev.pcusa.com/help',
 	themeData: '/assets/data.json'
 };

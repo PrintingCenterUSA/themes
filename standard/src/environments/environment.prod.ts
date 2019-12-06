@@ -3,6 +3,6 @@
 
 export const environment = {
   production: true,
-	apiEndpoint: '',
+	apiEndpoint: '/help',
 	themeData: '/themes/_active/assets/data.json'
 };
