@@ -4,5 +4,5 @@
 export const environment = {
   production: true,
 	apiEndpoint: '/help',
-	themeData: '/themes/_active/assets/data.json'
+	themeData: '/help/themes/_active/assets/data.json'
 };
