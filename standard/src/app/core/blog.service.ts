@@ -96,6 +96,13 @@ export class BlogService {
 			catchError(this.handleError)
 		);
 	}
+	getPageCatalog(): Observable<IPageCatalog> {
+		var url = environment.apiEndpoint + '/api/posts/pageCatalog';
+		return this.http.get<IPageCatalog>(url).pipe(
+			tap(data => this.logMessage('PageCatalog: ' + JSON.stringify(data))),
+			catchError(this.handleError)
+		);
+	}
 
 	getAuthors(): Observable<IAuthor> {
 		var url = environment.apiEndpoint + '/api/authors';
@@ -173,6 +180,10 @@ export interface IBlogSettings {
 	logo: string,
 	theme: string,
 	culture: string
+}
+export interface IPageCatalog {
+	page:IBlogPost,
+	children:any
 }
 
 export interface IBlogPost {

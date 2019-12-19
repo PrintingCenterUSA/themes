@@ -1,0 +1,5 @@
+<ul class="nav flex-column" *ngIf="items.length">
+    <li *ngFor="let item of items" class="nav-item"><a class="nav-link" [href]="'page/'+item.page.slug">{{item.page.title}}</a>
+        <page-catalog  *ngIf="item.children.length" [key]="key" [data]="item.children"></page-catalog>
+    </li> 
+</ul>

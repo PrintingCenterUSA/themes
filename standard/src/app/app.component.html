@@ -16,8 +16,17 @@
   </div>
 </header>
 
-<router-outlet></router-outlet>
 
+
+<div style="display: flex;">
+  <div>
+    <page-catalog *ngIf="pageCatalog && pageCatalog['children'].length"  [key]="children" [data]="pageCatalog['children']"></page-catalog>
+  </div>
+  <div style="flex:1;">
+    <router-outlet></router-outlet>
+  </div>
+  
+</div>
 <div class="modal fade blog-search" id="blog-search" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
