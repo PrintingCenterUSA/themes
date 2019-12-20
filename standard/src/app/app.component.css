@@ -3,3 +3,16 @@
     background: #00a5e7;
     position:initial;
 }
+.Main-Content
+{
+    display: flex;
+    
+}
+.Right-Container
+{
+    flex:1;
+}
+.Catalog-Nav
+{
+    background-color:#fff;
+}

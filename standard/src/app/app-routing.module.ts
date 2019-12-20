@@ -8,7 +8,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { AuthGuard } from './core/auth.guard';
 
 const routes: Routes = [
-	{ path: '', component: HomeComponent },
+	{ path: '', component: PostsComponent },
 	{ path: 'page/:slug', component: PostsComponent },
 	{
 		path: 'settings',
@@ -20,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
+	imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
 	exports: [RouterModule]
 })
 export class AppRoutingModule { }
