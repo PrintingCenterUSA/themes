@@ -4,6 +4,6 @@
 
 export const environment = {
   production: false,
-	apiEndpoint: 'http://dev.pcusa.com/help',
+	apiEndpoint: 'http://192.168.0.117:63023/help',
 	themeData: '/assets/data.json'
 };
