@@ -1,4 +1,4 @@
-<ul class="nav flex-column" *ngIf="items.length" (click)="click($event)">
+<ul class="nav flex-column" *ngIf="items.length" (click)="click($event)"  [ngClass]="{'font-level-1':level == 1,'font-level-2':level == 2,'font-level-3':level == 3}">
     <li *ngFor="let item of items" class="nav-item">
         <a *ngIf="!item.children.length" class="nav-link" [ngClass]="{'active':'/page/'+item.page.slug === activeUrl}"  [routerLink]="'page/'+item.page.slug">{{item.page.title}}</a>
         <div *ngIf="item.children.length" class="nav-link"  (click)="toggle($event)">
@@ -6,6 +6,6 @@
             <i class="item-icon fa" [ngClass]="{'fa-angle-right': hideChildren, 'fa-angle-down':!hideChildren}"></i>
         </div>
         
-        <page-catalog  *ngIf="!hideChildren && item.children.length" [key]="key" [data]="item.children"></page-catalog>
+        <page-catalog  *ngIf="!hideChildren && item.children.length" [level]="level+1" [key]="key" [data]="item.children"></page-catalog>
     </li> 
 </ul>

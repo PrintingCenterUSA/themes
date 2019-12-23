@@ -15,3 +15,15 @@ a,.nav-link{
     display: inline;
     padding-left: 0;
 }
+.font-level-1
+{
+    font-size: 22pt;
+}
+.font-level-2
+{
+    font-size: 18pt;
+}
+.font-level-4
+{
+    font-size: 14pt;
+}
