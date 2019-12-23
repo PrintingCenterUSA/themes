@@ -10,3 +10,8 @@ a,.nav-link{
     font-weight: bold;
     text-decoration: underline;
 }
+.nav-link > a
+{
+    display: inline;
+    padding-left: 0;
+}

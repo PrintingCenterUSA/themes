@@ -1,8 +1,8 @@
 <ul class="nav flex-column" *ngIf="items.length" (click)="click($event)">
     <li *ngFor="let item of items" class="nav-item">
         <a *ngIf="!item.children.length" class="nav-link" [ngClass]="{'active':'/page/'+item.page.slug === activeUrl}"  [routerLink]="'page/'+item.page.slug">{{item.page.title}}</a>
-        <div *ngIf="item.children.length" class="nav-link" (click)="toggle($event)">
-            {{item.page.title}}
+        <div *ngIf="item.children.length" class="nav-link"  (click)="toggle($event)">
+            <a  class="nav-link" [ngClass]="{'active':'/page/'+item.page.slug === activeUrl}"  [routerLink]="'page/'+item.page.slug">{{item.page.title}}</a>
             <i class="item-icon fa" [ngClass]="{'fa-angle-right': hideChildren, 'fa-angle-down':!hideChildren}"></i>
         </div>
         

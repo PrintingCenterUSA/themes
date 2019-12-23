@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BlogService, IBlogSettings, IPager, IPageCatalog } from './core/blog.service';
 import { environment } from '../environments/environment';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
 
-	constructor(private blogService: BlogService) { }
+	constructor(private blogService: BlogService,private router: Router) { }
 
 	title = 'standard';
 	root: string;
@@ -29,7 +30,19 @@ export class AppComponent implements OnInit {
 			result => { this.settings = result; }
 		);
 		this.blogService.getPageCatalog().subscribe(
-			result => {this.pageCatalog = result; }
+			result => {
+				this.pageCatalog = result; 
+				//Redirect to the first page
+				if(window.location.pathname.indexOf("page/") == -1)
+				{
+					if(this.pageCatalog && this.pageCatalog.children.length > 0)
+					{
+						this.router.navigateByUrl("page/"+this.pageCatalog.children[0].page.slug);
+					}				
+				}else{
+
+				}				
+			}
 		);
   }
 
