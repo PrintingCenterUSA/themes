@@ -15,6 +15,7 @@ export class PostsComponent implements OnInit {
   public avatarImg: string;
   errorMessage = '';
   navigationSubscription:any;
+  public searchKeyWords:string;
   constructor(private blogService: BlogService, private activeRouter: ActivatedRoute,private router: Router) { }
 
   ngOnInit(): void {
@@ -59,5 +60,29 @@ export class PostsComponent implements OnInit {
       "July", "August", "September", "October", "November", "December"];
     var d = new Date(date); 
     return monthNames[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+  }
+  onSearchEnter(event:any):void
+  {
+    var slug = this.activeRouter.snapshot.paramMap.get('slug');
+    this.router.navigateByUrl("/?term="+this.searchKeyWords+"&pageId="+this.postModel.post.id+"&slug="+slug);
+  }
+  get showSearch():boolean
+  {
+    let show = false;
+    var slug = this.activeRouter.snapshot.paramMap.get('slug');
+    if(slug === "home")
+    {
+      show = true;
+    }else{
+      if(sessionStorage.getItem("hasChildPageIdList"))
+      {
+        let hasChildPageIdList:any =  JSON.parse(sessionStorage.getItem("hasChildPageIdList"));
+        if(this.postModel && hasChildPageIdList.indexOf(this.postModel.post.id) != -1)
+        {
+          show = true;
+        }
+      }    
+    }
+    return show;
   }
 }

@@ -8,7 +8,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { AuthGuard } from './core/auth.guard';
 
 const routes: Routes = [
-	{ path: '', component: PostsComponent },
+	{ path: '', component: HomeComponent },
 	{ path: 'page/:slug', component: PostsComponent },
 	{
 		path: 'settings',

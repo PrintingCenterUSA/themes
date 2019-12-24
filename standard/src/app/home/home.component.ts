@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService, IBlogSettings, IPostList } from '../core/blog.service';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-home',
@@ -14,9 +15,10 @@ export class HomeComponent implements OnInit {
 	errorMessage = '';
 	public emailModel: string;
 
-	constructor(private blogService: BlogService) { }
+	constructor(private blogService: BlogService,private router: Router) { }
 
 	ngOnInit(): void {
+		
 		this.emailModel = '';
 		this.apiRoot = environment.apiEndpoint + '/';
 		this.blogService.getSettings().subscribe(
@@ -27,7 +29,15 @@ export class HomeComponent implements OnInit {
 			error => this.errorMessage = <any>error
 		);
 		this.blogService.getPosts().subscribe(
-			result => { this.postList = result; },
+			result => { 
+				this.postList = result; 
+				if(this.postList.posts.length === 0)
+				{
+					setTimeout(() => {
+						window.history.back();
+					}, 1000);
+				}
+			},
 			error => this.errorMessage = <any>error
 		);
 	}

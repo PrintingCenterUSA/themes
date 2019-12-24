@@ -4,6 +4,6 @@
 
 export const environment = {
   production: false,
-	apiEndpoint: 'http://192.168.0.117:63023/help',
+	apiEndpoint: 'http://localhost:63023/help',
 	themeData: '/assets/data.json'
 };

@@ -32,18 +32,33 @@ export class AppComponent implements OnInit {
 		this.blogService.getPageCatalog().subscribe(
 			result => {
 				this.pageCatalog = result; 
-				//Redirect to the first page
+				this.refreshPageCatalogSessionData();
+				//Redirect to the home page				
 				if(window.location.pathname.indexOf("page/") == -1)
 				{
-					if(this.pageCatalog && this.pageCatalog.children.length > 0)
-					{
-						this.router.navigateByUrl("page/"+this.pageCatalog.children[0].page.slug);
-					}				
-				}else{
-
-				}				
+					this.router.navigateByUrl("page/home");				
+				}			
 			}
 		);
+  }
+  refreshPageCatalogSessionData():void
+  {
+	  let hasChildPageIdList = [];
+	  this.calculatePageWhichHasChild(this.pageCatalog,hasChildPageIdList);
+	  sessionStorage.setItem("hasChildPageIdList",JSON.stringify(hasChildPageIdList));
+  }
+  calculatePageWhichHasChild(catalogData:IPageCatalog,outDataList:any):void
+  {
+	  if(catalogData.children.length > 0)
+	  {
+		if(catalogData.page)
+		{
+			outDataList.push(catalogData.page.id);
+		}		
+		catalogData.children.forEach(element => {
+			this.calculatePageWhichHasChild(element,outDataList);
+		});
+	  }
   }
 
   onSubmit(f: NgForm) {

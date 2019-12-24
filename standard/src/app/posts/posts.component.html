@@ -18,10 +18,14 @@
               </span>
             </ng-template>
           </div>
+          <div *ngIf="showSearch" class="input-group">
+            <input type="text" class="form-control"  [(ngModel)]="searchKeyWords" (keyup.enter)="onSearchEnter($event)"/>
+            <span class="input-group-addon"><i class="item-icon fa fa-search"></i></span>
+            </div>
         </header>
         <div [innerHTML]="postModel.post.content" class="post-content"></div>
 
-        <ul *ngIf="postModel.older || postModel.newer" class="pagination justify-content-center">
+        <ul *ngIf="postModel.older || postModel.newer" class="pagination justify-content-center" style="display: none;">
           <li *ngIf="postModel.older" class="item item-prev">
             <a class="item-link" href="page/{{postModel.older.slug}}" title="{{postModel.older.title}}">
               <i class="item-icon fa fa-angle-left"></i>
@@ -36,5 +40,7 @@
       </div>
     </section>
   </article>
+  <!--
   <app-footer></app-footer>
+  -->
 </ng-template>
