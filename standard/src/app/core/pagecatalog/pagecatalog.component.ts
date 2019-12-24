@@ -9,7 +9,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 export class PagecatalogComponent implements OnInit {
   @Input('data') items: Array<Object>;
   @Input('key') key: string;
-  @Input('level') level:Number;
+  @Input('level') level:number;
   hideChildren:boolean;
   navigationSubscription:any;
   activeUrl:string;
