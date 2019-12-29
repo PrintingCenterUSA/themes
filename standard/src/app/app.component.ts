@@ -44,11 +44,16 @@ export class AppComponent implements OnInit {
   refreshPageCatalogSessionData():void
   {
 	  let hasChildPageIdList = [];
-	  this.calculatePageWhichHasChild(this.pageCatalog,hasChildPageIdList);
+	  this.processPageData(this.pageCatalog,'page',hasChildPageIdList);
 	  sessionStorage.setItem("hasChildPageIdList",JSON.stringify(hasChildPageIdList));
   }
-  calculatePageWhichHasChild(catalogData:IPageCatalog,outDataList:any):void
+  processPageData(catalogData:IPageCatalog,pageUrl:string,outDataList:any):void
   {
+	if(catalogData.page)
+	{
+		pageUrl += "/"+catalogData.page.slug;
+		catalogData.page.url = pageUrl;
+	}
 	  if(catalogData.children.length > 0)
 	  {
 		if(catalogData.page)
@@ -56,7 +61,7 @@ export class AppComponent implements OnInit {
 			outDataList.push(catalogData.page.id);
 		}		
 		catalogData.children.forEach(element => {
-			this.calculatePageWhichHasChild(element,outDataList);
+			this.processPageData(element,pageUrl,outDataList);
 		});
 	  }
   }

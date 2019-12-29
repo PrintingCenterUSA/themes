@@ -42,7 +42,7 @@ export class PostsComponent implements OnInit {
   }
   loadPageData():void
   {
-    var slug = this.activeRouter.snapshot.paramMap.get('slug0');
+    var slug = this.slug;
       if(slug){
         this.blogService.getPost(slug).subscribe(
           result => { 
@@ -63,13 +63,13 @@ export class PostsComponent implements OnInit {
   }
   onSearchEnter(event:any):void
   {
-    var slug = this.activeRouter.snapshot.paramMap.get('slug0');
+    var slug = this.slug;
     this.router.navigateByUrl("/search?term="+this.searchKeyWords+"&pageId="+this.postModel.post.id+"&slug="+slug);
   }
   get showSearch():boolean
   {
     let show = false;
-    var slug = this.activeRouter.snapshot.paramMap.get('slug0');
+    var slug = this.slug;
     if(slug === "home")
     {
       show = true;
@@ -84,5 +84,33 @@ export class PostsComponent implements OnInit {
       }    
     }
     return show;
+  }
+  get slug():string
+  {
+    var slug0 = this.activeRouter.snapshot.paramMap.get('slug0');
+    var slug1 = this.activeRouter.snapshot.paramMap.get('slug1');
+    var slug2 = this.activeRouter.snapshot.paramMap.get('slug2');
+    var slug3 = this.activeRouter.snapshot.paramMap.get('slug3');
+    var slug4 = this.activeRouter.snapshot.paramMap.get('slug4');
+    if(!slug1)
+    {
+      return slug0;
+    }
+    else if(!slug2)
+    {
+      return slug1;
+    }
+    else if(!slug3)
+    {
+      return slug2;
+    }
+    else if(!slug4)
+    {
+      return slug3;
+    }
+    else
+    {
+      return slug4;
+    }
   }
 }

@@ -205,6 +205,7 @@ export interface IBlogPost {
 	slug: string;
 	author: IAuthor;
 	cover: string;
+	url:string;
 }
 
 export interface IPager {
