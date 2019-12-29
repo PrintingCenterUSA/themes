@@ -1,7 +1,7 @@
 
-<a *ngIf="!data.children.length" class="nav-link" [ngClass]="{'active':'/page/'+data.page.slug === activeUrl}"  [routerLink]="data.page.url">{{data.page.title}}</a>
+<a *ngIf="!data.children.length" class="nav-link" [ngClass]="{'active':'/page/'+data.page.slug === activeUrl}"  [routerLink]="data.page.url">{{data.page.navHeader}}</a>
 <div *ngIf="data.children.length" class="nav-link"  (click)="toggle($event)">
-    <a  class="nav-link" [ngClass]="{'active':'/page/'+data.page.slug === activeUrl}"  [routerLink]="data.page.url">{{data.page.title}}</a>
+    <a  class="nav-link" [ngClass]="{'active':'/page/'+data.page.slug === activeUrl}"  [routerLink]="data.page.url">{{data.page.navHeader}}</a>
     <i class="item-icon fa" [ngClass]="{'fa-angle-right': hideChildren, 'fa-angle-down':!hideChildren}"></i>
 </div>
 <nav-menu *ngIf="!hideChildren && data.children.length" [level]="level+1" [data]="data.children" ></nav-menu>
