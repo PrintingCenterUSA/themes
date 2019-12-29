@@ -15,11 +15,11 @@ import { ContactComponent } from './core/contact/contact.component';
 import { NewsletterComponent } from './core/newsletter/newsletter.component';
 import { CategoriesComponent } from './core/categories/categories.component';
 import { RecentpostsComponent } from './core/recentposts/recentposts.component';
-import { SearchComponent } from './core/search/search.component';
 import { SocialbuttonsComponent } from './core/socialbuttons/socialbuttons.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NavMenuComponent } from './core/nav-menu/nav-menu.component';
 import { NavMenuItemComponent } from './core/nav-menu-item/nav-menu-item.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [

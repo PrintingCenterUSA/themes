@@ -42,7 +42,7 @@ export class PostsComponent implements OnInit {
   }
   loadPageData():void
   {
-    var slug = this.activeRouter.snapshot.paramMap.get('slug');
+    var slug = this.activeRouter.snapshot.paramMap.get('slug0');
       if(slug){
         this.blogService.getPost(slug).subscribe(
           result => { 
@@ -63,13 +63,13 @@ export class PostsComponent implements OnInit {
   }
   onSearchEnter(event:any):void
   {
-    var slug = this.activeRouter.snapshot.paramMap.get('slug');
-    this.router.navigateByUrl("/?term="+this.searchKeyWords+"&pageId="+this.postModel.post.id+"&slug="+slug);
+    var slug = this.activeRouter.snapshot.paramMap.get('slug0');
+    this.router.navigateByUrl("/search?term="+this.searchKeyWords+"&pageId="+this.postModel.post.id+"&slug="+slug);
   }
   get showSearch():boolean
   {
     let show = false;
-    var slug = this.activeRouter.snapshot.paramMap.get('slug');
+    var slug = this.activeRouter.snapshot.paramMap.get('slug0');
     if(slug === "home")
     {
       show = true;

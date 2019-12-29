@@ -6,10 +6,17 @@ import { PostsComponent } from './posts/posts.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AuthGuard } from './core/auth.guard';
+import { SearchComponent } from './search/search.component';
+
 
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
-	{ path: 'page/:slug', component: PostsComponent },
+	{ path: 'search', component: SearchComponent },
+	{ path: 'page/:slug0', component: PostsComponent },
+	{ path: 'page/:slug0/slug1', component: PostsComponent },
+	{ path: 'page/:slug0/slug1/slug2', component: PostsComponent },
+	{ path: 'page/:slug0/slug1/slug2/slug3', component: PostsComponent },
+	{ path: 'page/:slug0/slug1/slug2/slug3/slug4', component: PostsComponent },
 	{
 		path: 'settings',
 		component: SettingsComponent,

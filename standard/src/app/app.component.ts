@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
 				this.pageCatalog = result; 
 				this.refreshPageCatalogSessionData();
 				//Redirect to the home page				
-				if(window.location.pathname.indexOf("page/") == -1)
+				if(window.location.pathname.indexOf("page/") == -1 && window.location.pathname.indexOf("search") == -1 )
 				{
 					this.router.navigateByUrl("page/home");				
 				}			
