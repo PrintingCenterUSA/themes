@@ -31,7 +31,7 @@ export class BlogService {
 		var category = this.route.snapshot.queryParamMap.get('category');
 		var term = this.route.snapshot.queryParamMap.get('term');
 		var pageId = this.route.snapshot.queryParamMap.get('pageId');
-		var slug = this.route.snapshot.queryParamMap.get('slug');
+		var pageUrl = this.route.snapshot.queryParamMap.get('pageUrl');
 		if (page) {
 			postsUrl = environment.apiEndpoint + '/api/posts?include=FP&page=' + page;
 		}
@@ -45,7 +45,7 @@ export class BlogService {
 		}
 
 		//Search in Home page, search all posts
-		if(slug === "home")
+		if(pageUrl === "page/home")
 		{
 			return this.http.get<IPostList>(searchUrl + term).pipe(
 				tap(data => this.logMessage('Search: ' + JSON.stringify(data))),
@@ -90,8 +90,15 @@ export class BlogService {
 		);
 	}
 
-	getPost(slug: string): Observable<IPostModel> {
-		var url = environment.apiEndpoint + '/api/posts/byslug/' + slug;
+	getPost(postId: string): Observable<IPostModel> {
+		var url = environment.apiEndpoint + '/api/posts/bypostid/' + postId;
+		return this.http.get<IPostModel>(url).pipe(
+			tap(data => this.logMessage('Blog post: ' + JSON.stringify(data))),
+			catchError(this.handleError)
+		);
+	}
+	getHomePost(): Observable<IPostModel> {
+		var url = environment.apiEndpoint + '/api/posts/byhomepage';
 		return this.http.get<IPostModel>(url).pipe(
 			tap(data => this.logMessage('Blog post: ' + JSON.stringify(data))),
 			catchError(this.handleError)

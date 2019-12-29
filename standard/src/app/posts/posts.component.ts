@@ -42,9 +42,20 @@ export class PostsComponent implements OnInit {
   }
   loadPageData():void
   {
-    var slug = this.slug;
-      if(slug){
-        this.blogService.getPost(slug).subscribe(
+    if(this.pageUrl === 'page/home')
+    {
+      this.blogService.getHomePost().subscribe(
+        result => { 
+          this.postModel = result;
+          this.postCover = environment.apiEndpoint + '/' + this.postModel.post.cover;
+          this.avatarImg = environment.apiEndpoint + '/' + this.postModel.post.author.avatar;
+        },
+        error => this.errorMessage = <any>error
+      );
+    }else{
+      var postId = this.slupostId;
+      if(postId){
+        this.blogService.getPost(postId).subscribe(
           result => { 
             this.postModel = result;
             this.postCover = environment.apiEndpoint + '/' + this.postModel.post.cover;
@@ -53,6 +64,7 @@ export class PostsComponent implements OnInit {
           error => this.errorMessage = <any>error
         );
       }
+    } 
   }
 
   toDate(date): string {
@@ -63,14 +75,12 @@ export class PostsComponent implements OnInit {
   }
   onSearchEnter(event:any):void
   {
-    var slug = this.slug;
-    this.router.navigateByUrl("/search?term="+this.searchKeyWords+"&pageId="+this.postModel.post.id+"&slug="+slug);
+    this.router.navigateByUrl("/search?term="+this.searchKeyWords+"&pageId="+this.postModel.post.id+"&pageUrl="+this.pageUrl);
   }
   get showSearch():boolean
   {
     let show = false;
-    var slug = this.slug;
-    if(slug === "home")
+    if(this.pageUrl === "page/home")
     {
       show = true;
     }else{
@@ -85,32 +95,40 @@ export class PostsComponent implements OnInit {
     }
     return show;
   }
-  get slug():string
+  get slupostId():string
   {
+    let urlPageId:any =  JSON.parse(sessionStorage.getItem("urlPageId"));
+    let postId = urlPageId[this.pageUrl];
+    return postId;
+  }
+  get pageUrl():string
+  {
+    var pageUrl = 'page';
     var slug0 = this.activeRouter.snapshot.paramMap.get('slug0');
     var slug1 = this.activeRouter.snapshot.paramMap.get('slug1');
     var slug2 = this.activeRouter.snapshot.paramMap.get('slug2');
     var slug3 = this.activeRouter.snapshot.paramMap.get('slug3');
     var slug4 = this.activeRouter.snapshot.paramMap.get('slug4');
-    if(!slug1)
+    if(slug0)
     {
-      return slug0;
+      pageUrl += "/"+slug0;
     }
-    else if(!slug2)
+    if(slug1)
     {
-      return slug1;
+      pageUrl += "/"+slug1;
     }
-    else if(!slug3)
+    if(slug2)
     {
-      return slug2;
+      pageUrl += "/"+slug2;
     }
-    else if(!slug4)
+    if(slug3)
     {
-      return slug3;
+      pageUrl += "/"+slug3;
     }
-    else
+    if(slug4)
     {
-      return slug4;
+      pageUrl += "/"+slug4;
     }
+    return pageUrl;
   }
 }

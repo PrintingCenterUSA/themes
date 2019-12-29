@@ -44,24 +44,27 @@ export class AppComponent implements OnInit {
   refreshPageCatalogSessionData():void
   {
 	  let hasChildPageIdList = [];
-	  this.processPageData(this.pageCatalog,'page',hasChildPageIdList);
+	  let urlPageId = {};
+	  this.processPageData(this.pageCatalog,'page',hasChildPageIdList,urlPageId);
 	  sessionStorage.setItem("hasChildPageIdList",JSON.stringify(hasChildPageIdList));
+	  sessionStorage.setItem("urlPageId",JSON.stringify(urlPageId));
   }
-  processPageData(catalogData:IPageCatalog,pageUrl:string,outDataList:any):void
+  processPageData(catalogData:IPageCatalog,pageUrl:string,outHasChildPageIdList:any,outUrlPageId):void
   {
 	if(catalogData.page)
 	{
 		pageUrl += "/"+catalogData.page.slug;
 		catalogData.page.url = pageUrl;
+		outUrlPageId[pageUrl] = catalogData.page.id;
 	}
 	  if(catalogData.children.length > 0)
 	  {
 		if(catalogData.page)
 		{
-			outDataList.push(catalogData.page.id);
+			outHasChildPageIdList.push(catalogData.page.id);
 		}		
 		catalogData.children.forEach(element => {
-			this.processPageData(element,pageUrl,outDataList);
+			this.processPageData(element,pageUrl,outHasChildPageIdList,outUrlPageId);
 		});
 	  }
   }
