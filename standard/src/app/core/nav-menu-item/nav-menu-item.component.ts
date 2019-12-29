@@ -7,7 +7,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
   styleUrls: ['./nav-menu-item.component.css']
 })
 export class NavMenuItemComponent implements OnInit {
-  @Input('data') data: Array<Object>;
+  @Input('data') data: any;
   @Input('level') level:number;
   hideChildren:boolean;
   navigationSubscription:any;
@@ -29,7 +29,7 @@ export class NavMenuItemComponent implements OnInit {
       this.navigationSubscription.unsubscribe();
     }
   }
-  toggle(event:any,pageId:any)
+  toggle(event:any)
   {
     event.stopPropagation();
     this.hideChildren = !this.hideChildren;

@@ -1,4 +1,3 @@
-
 <a *ngIf="!data.children.length" class="nav-link" [ngClass]="{'active':'/page/'+data.page.slug === activeUrl}"  [routerLink]="data.page.url">{{data.page.navHeader}}</a>
 <div *ngIf="data.children.length" class="nav-link"  (click)="toggle($event)">
     <a  class="nav-link" [ngClass]="{'active':'/page/'+data.page.slug === activeUrl}"  [routerLink]="data.page.url">{{data.page.navHeader}}</a>
