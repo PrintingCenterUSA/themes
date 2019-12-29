@@ -20,7 +20,7 @@
 
 <div class="Main-Content">
   <div class="Catalog-Nav">
-    <page-catalog *ngIf="pageCatalog && pageCatalog['children'].length" [level]=1  [key]="'children'" [data]="pageCatalog['children']"></page-catalog>
+    <nav-menu *ngIf="pageCatalog && pageCatalog['children'].length" [level]=1  [data]="pageCatalog['children']"></nav-menu>
   </div>
   <div class="Right-Container">
     <router-outlet></router-outlet>

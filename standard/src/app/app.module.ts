@@ -18,7 +18,8 @@ import { RecentpostsComponent } from './core/recentposts/recentposts.component';
 import { SearchComponent } from './core/search/search.component';
 import { SocialbuttonsComponent } from './core/socialbuttons/socialbuttons.component';
 import { SettingsComponent } from './settings/settings.component';
-import { PagecatalogComponent } from './core/pagecatalog/pagecatalog.component';
+import { NavMenuComponent } from './core/nav-menu/nav-menu.component';
+import { NavMenuItemComponent } from './core/nav-menu-item/nav-menu-item.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { PagecatalogComponent } from './core/pagecatalog/pagecatalog.component';
 		SearchComponent,
 		SocialbuttonsComponent,
 		SettingsComponent,
-		PagecatalogComponent
+    NavMenuComponent,
+    NavMenuItemComponent
   ],
   imports: [
     BrowserModule,

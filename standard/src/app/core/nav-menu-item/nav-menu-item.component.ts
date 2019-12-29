@@ -2,13 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'page-catalog',
-  templateUrl: './pagecatalog.component.html',
-  styleUrls: ['./pagecatalog.component.css']
+  selector: 'nav-menu-item',
+  templateUrl: './nav-menu-item.component.html',
+  styleUrls: ['./nav-menu-item.component.css']
 })
-export class PagecatalogComponent implements OnInit {
-  @Input('data') items: Array<Object>;
-  @Input('key') key: string;
+export class NavMenuItemComponent implements OnInit {
+  @Input('data') data: Array<Object>;
   @Input('level') level:number;
   hideChildren:boolean;
   navigationSubscription:any;
@@ -30,7 +29,7 @@ export class PagecatalogComponent implements OnInit {
       this.navigationSubscription.unsubscribe();
     }
   }
-  toggle(event:any)
+  toggle(event:any,pageId:any)
   {
     event.stopPropagation();
     this.hideChildren = !this.hideChildren;
