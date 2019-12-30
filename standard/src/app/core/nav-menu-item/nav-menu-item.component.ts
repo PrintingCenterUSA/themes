@@ -21,6 +21,10 @@ export class NavMenuItemComponent implements OnInit {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
         this.activeUrl = e.url;
+        setTimeout(() => {
+          this.calculateHIdeChildreBaseOnUrl();
+        }, 200);
+       
       }
     });
   }
@@ -37,5 +41,21 @@ export class NavMenuItemComponent implements OnInit {
   click(event:any)
   {
     event.stopPropagation();
+  }
+  calculateHIdeChildreBaseOnUrl()
+  {
+    if(this.activeUrl && this.data && this.data.page)
+    {
+      console.log((this.activeUrl.indexOf(this.data.page.slug) == -1) + " "+this.activeUrl + " "+this.data.page.slug)
+      this.hideChildren =  this.activeUrl.indexOf(this.data.page.slug) == -1
+    }else{
+      console.log("dddd false")
+      this.hideChildren = true;
+    }
+  }
+
+  get currentPage():boolean
+  {
+    return '/'+this.data.page.url === this.activeUrl
   }
 }
