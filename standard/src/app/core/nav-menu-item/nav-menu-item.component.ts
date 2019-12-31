@@ -13,10 +13,11 @@ export class NavMenuItemComponent implements OnInit {
   navigationSubscription:any;
   activeUrl:string;
   constructor(private router: Router) { 
-    this.hideChildren = true;
+    
   }
 
   ngOnInit() {
+    this.hideChildren = true;
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
@@ -44,12 +45,21 @@ export class NavMenuItemComponent implements OnInit {
   }
   calculateHIdeChildreBaseOnUrl()
   {
+    if(this.currentPage)
+    {
+      this.hideChildren = false;
+      return
+    }
+
+    if(this.hideChildren)
+    {
+      return
+    }
+   
     if(this.activeUrl && this.data && this.data.page)
     {
-      console.log((this.activeUrl.indexOf(this.data.page.slug) == -1) + " "+this.activeUrl + " "+this.data.page.slug)
-      this.hideChildren =  this.activeUrl.indexOf(this.data.page.slug) == -1
+      this.hideChildren =  this.activeUrl.indexOf(this.data.page.slug) == -1;
     }else{
-      console.log("dddd false")
       this.hideChildren = true;
     }
   }

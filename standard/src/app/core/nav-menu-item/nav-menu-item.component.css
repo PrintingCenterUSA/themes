@@ -1,10 +1,9 @@
 a,.nav-link{
-    color: #00a5e7;
+    color: #00a5e7 !important;
 }
 .active
 {
     font-weight: bold;
-    text-decoration: underline;
 }
 .nav-link > a
 {
