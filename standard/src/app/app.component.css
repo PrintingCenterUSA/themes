@@ -2,6 +2,7 @@
 {
     background: #00a5e7;
     position:initial;
+    display: none !important;
 }
 .Main-Content
 {
