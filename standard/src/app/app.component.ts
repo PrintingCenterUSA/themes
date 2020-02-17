@@ -29,10 +29,25 @@ export class AppComponent implements OnInit {
 		this.blogService.getSettings().subscribe(
 			result => { this.settings = result; }
 		);
+		var cacheCatalogDataStr = sessionStorage.getItem('nav_catalog_data');
+		if(cacheCatalogDataStr)
+		{
+			debugger;
+			this.pageCatalog = JSON.parse(cacheCatalogDataStr); 
+				this.refreshPageCatalogSessionData();
+		}
 		this.blogService.getPageCatalog().subscribe(
 			result => {
+				var cacheCatalogDataStr = sessionStorage.getItem('nav_catalog_data');
+				if(cacheCatalogDataStr == JSON.stringify(result))
+				{
+					debugger;
+					return;
+				}
+				sessionStorage.setItem('nav_catalog_data',JSON.stringify(result));
 				this.pageCatalog = result; 
 				this.refreshPageCatalogSessionData();
+				
 				//Redirect to the home page				
 				if(window.location.pathname.indexOf("page/") == -1 && window.location.pathname.indexOf("search") == -1 )
 				{

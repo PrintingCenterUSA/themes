@@ -6,7 +6,8 @@ import { BlogService, IBlogSettings, IPostModel } from '../core/blog.service';
 
 @Component({
   selector: 'app-posts',
-  templateUrl: './posts.component.html'
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
   public blogSettings: IBlogSettings;
@@ -54,7 +55,7 @@ export class PostsComponent implements OnInit {
       );
     }else{
       var postId = this.slupostId;
-      if(postId && !this.hasChildPage(postId)){
+      if(postId){
         this.blogService.getPost(postId).subscribe(
           result => { 
             this.postModel = result;
@@ -79,7 +80,7 @@ export class PostsComponent implements OnInit {
   }
   get showSearch():boolean
   {
-    return false
+    return this.hasChildPage( this.postModel.post.id)
   }
    hasChildPage(postId):boolean
   {
