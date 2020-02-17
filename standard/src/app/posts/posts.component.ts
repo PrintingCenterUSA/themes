@@ -54,7 +54,7 @@ export class PostsComponent implements OnInit {
       );
     }else{
       var postId = this.slupostId;
-      if(postId){
+      if(postId && !this.hasChildPage(postId)){
         this.blogService.getPost(postId).subscribe(
           result => { 
             this.postModel = result;
@@ -79,21 +79,25 @@ export class PostsComponent implements OnInit {
   }
   get showSearch():boolean
   {
-    let show = false;
+    return false
+  }
+   hasChildPage(postId):boolean
+  {
+    let hasChild = false;
     if(this.pageUrl === "page/home")
     {
-      show = true;
+      hasChild = true;
     }else{
       if(sessionStorage.getItem("hasChildPageIdList"))
       {
         let hasChildPageIdList:any =  JSON.parse(sessionStorage.getItem("hasChildPageIdList"));
-        if(this.postModel && hasChildPageIdList.indexOf(this.postModel.post.id) != -1)
+        if( hasChildPageIdList.indexOf(postId) != -1)
         {
-          show = true;
+          hasChild = true;
         }
       }    
     }
-    return show;
+    return hasChild;
   }
   get slupostId():string
   {
