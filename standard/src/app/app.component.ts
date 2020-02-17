@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
 		var cacheCatalogDataStr = sessionStorage.getItem('nav_catalog_data');
 		if(cacheCatalogDataStr)
 		{
-			debugger;
 			this.pageCatalog = JSON.parse(cacheCatalogDataStr); 
 				this.refreshPageCatalogSessionData();
 		}
@@ -41,7 +40,6 @@ export class AppComponent implements OnInit {
 				var cacheCatalogDataStr = sessionStorage.getItem('nav_catalog_data');
 				if(cacheCatalogDataStr == JSON.stringify(result))
 				{
-					debugger;
 					return;
 				}
 				sessionStorage.setItem('nav_catalog_data',JSON.stringify(result));
