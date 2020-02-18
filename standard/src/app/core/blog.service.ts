@@ -48,19 +48,19 @@ export class BlogService {
 		if(pageUrl === "page/home")
 		{
 			return this.http.get<IPostList>(searchUrl + term).pipe(
-				tap(data => this.logMessage('Search: ' + JSON.stringify(data))),
+				//tap(data => this.logMessage('Search: ' + JSON.stringify(data))),
 				catchError(this.handleError)
 			);
 		}
 		else if (term) {
 			return this.http.get<IPostList>(searchUrl + term+"?currentPageId="+pageId).pipe(
-				tap(data => this.logMessage('Search: ' + JSON.stringify(data))),
+			//	tap(data => this.logMessage('Search: ' + JSON.stringify(data))),
 				catchError(this.handleError)
 			);
 		}
 		else {
 			return this.http.get<IPostList>(postsUrl).pipe(
-				tap(data => this.logMessage('Posts: ' + JSON.stringify(data))),
+				//tap(data => this.logMessage('Posts: ' + JSON.stringify(data))),
 				catchError(this.handleError)
 			);
 		}
@@ -69,7 +69,7 @@ export class BlogService {
 	getRecent(): Observable<IPostList> {
 		var postsUrl = environment.apiEndpoint + '/api/posts?include=FP&page=1';
 		return this.http.get<IPostList>(postsUrl).pipe(
-			tap(data => this.logMessage('Recent posts: ' + JSON.stringify(data))),
+			//tap(data => this.logMessage('Recent posts: ' + JSON.stringify(data))),
 			catchError(this.handleError)
 		);
 	}
@@ -77,7 +77,7 @@ export class BlogService {
 	getFeatured(): Observable<IPostList> {
 		var postsUrl = environment.apiEndpoint + '/api/posts?include=F&page=1';
 		return this.http.get<IPostList>(postsUrl).pipe(
-			tap(data => this.logMessage('Featured posts: ' + JSON.stringify(data))),
+			//tap(data => this.logMessage('Featured posts: ' + JSON.stringify(data))),
 			catchError(this.handleError)
 		);
 	}
@@ -85,7 +85,7 @@ export class BlogService {
 	getPopular(): Observable<IPostList> {
 		var postsUrl = environment.apiEndpoint + '/api/posts/popular';
 		return this.http.get<IPostList>(postsUrl).pipe(
-			tap(data => this.logMessage('Popular posts: ' + JSON.stringify(data))),
+			//tap(data => this.logMessage('Popular posts: ' + JSON.stringify(data))),
 			catchError(this.handleError)
 		);
 	}
@@ -93,14 +93,14 @@ export class BlogService {
 	getPost(postId: string): Observable<IPostModel> {
 		var url = environment.apiEndpoint + '/api/posts/bypostid/' + postId;
 		return this.http.get<IPostModel>(url).pipe(
-			tap(data => this.logMessage('Blog post: ' + JSON.stringify(data))),
+			//tap(data => this.logMessage('Blog post: ' + JSON.stringify(data))),
 			catchError(this.handleError)
 		);
 	}
 	getHomePost(): Observable<IPostModel> {
 		var url = environment.apiEndpoint + '/api/posts/byhomepage';
 		return this.http.get<IPostModel>(url).pipe(
-			tap(data => this.logMessage('Blog post: ' + JSON.stringify(data))),
+			//tap(data => this.logMessage('Blog post: ' + JSON.stringify(data))),
 			catchError(this.handleError)
 		);
 	}
@@ -108,14 +108,14 @@ export class BlogService {
 	getSettings(): Observable<IBlogSettings> {
 		var url = environment.apiEndpoint + '/api/settings';
 		return this.http.get<IBlogSettings>(url).pipe(
-			tap(data => this.logMessage('Settings: ' + JSON.stringify(data))),
+			//tap(data => this.logMessage('Settings: ' + JSON.stringify(data))),
 			catchError(this.handleError)
 		);
 	}
 	getPageCatalog(): Observable<IPageCatalog> {
 		var url = environment.apiEndpoint + '/api/posts/pageCatalog';
 		return this.http.get<IPageCatalog>(url).pipe(
-			tap(data => this.logMessage('PageCatalog: ' + JSON.stringify(data))),
+			//tap(data => this.logMessage('PageCatalog: ' + JSON.stringify(data))),
 			catchError(this.handleError)
 		);
 	}
@@ -123,7 +123,7 @@ export class BlogService {
 	getAuthors(): Observable<IAuthor> {
 		var url = environment.apiEndpoint + '/api/authors';
 		return this.http.get<IAuthor>(url).pipe(
-			tap(data => this.logMessage('Authors: ' + JSON.stringify(data))),
+			//tap(data => this.logMessage('Authors: ' + JSON.stringify(data))),
 			catchError(this.handleError)
 		);
 	}
@@ -131,7 +131,7 @@ export class BlogService {
 	getCategories(): Observable<ICategoryItem[]> {
 		var url = environment.apiEndpoint + '/api/posts/categories';
 		return this.http.get<ICategoryItem[]>(url).pipe(
-			tap(data => this.logMessage('Categories: ' + JSON.stringify(data))),
+			//tap(data => this.logMessage('Categories: ' + JSON.stringify(data))),
 			catchError(this.handleError)
 		);
 	}

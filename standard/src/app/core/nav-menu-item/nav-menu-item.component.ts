@@ -18,13 +18,26 @@ export class NavMenuItemComponent implements OnInit {
 
   ngOnInit() {
     this.hideChildren = true;
+    if(this.data.page.url == 'page/ordering')
+    {
+      //debugger;
+      console.log('page/ordering ngOnInit');
+    }
+    if(!this.activeUrl)
+    {
+      this.activeUrl = location.pathname;
+    }
+    this.calculateHideChildreBaseOnUrl();
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
         this.activeUrl = e.url;
+        /*
         setTimeout(() => {
-          this.calculateHIdeChildreBaseOnUrl();
-        }, 200);
+          this.calculateHideChildreBaseOnUrl();
+        }, 2000);
+        */
+       this.calculateHideChildreBaseOnUrl();
        
       }
     });
@@ -43,8 +56,9 @@ export class NavMenuItemComponent implements OnInit {
   {
     event.stopPropagation();
   }
-  calculateHIdeChildreBaseOnUrl()
+  calculateHideChildreBaseOnUrl()
   {
+    /*
     if(this.currentPage)
     {
       this.hideChildren = false;
@@ -54,11 +68,16 @@ export class NavMenuItemComponent implements OnInit {
     if(this.hideChildren)
     {
       return
-    }
-   
+    }*/
+    //console.log("this.activeUrl:"+this.activeUrl+ " this.data:"+this.data);
     if(this.activeUrl && this.data && this.data.page)
     {
-      this.hideChildren =  this.activeUrl.indexOf(this.data.page.slug) == -1;
+     
+      this.hideChildren =  this.activeUrl.indexOf(this.data.page.url) == -1;
+      if(!this.hideChildren)
+      {
+        console.log("this.activeUrl:"+this.activeUrl+" this.data.page.url:"+this.data.page.url)
+      }
     }else{
       this.hideChildren = true;
     }

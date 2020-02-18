@@ -65,7 +65,14 @@ export class PostsComponent implements OnInit {
             this.postCover = environment.apiEndpoint + '/' + this.postModel.post.cover;
             this.avatarImg = environment.apiEndpoint + '/' + this.postModel.post.author.avatar;
             setTimeout(() => {
-              window.scrollTo(0,0);
+              //Run in IFrame
+              if(window.parent != window)
+              {
+                window.parent.scrollTo(0,0);
+              }else{
+                window.scrollTo(0,0);
+              }
+             
             }, 500);
           },
           error => this.errorMessage = <any>error
