@@ -25,7 +25,13 @@ export class NavMenuItemComponent implements OnInit {
     }
     if(!this.activeUrl)
     {
-      this.activeUrl = location.pathname;
+      var locationPath = location.pathname;
+      debugger;
+      if(locationPath.indexOf("/help") === 0 && locationPath != '/help')
+      {
+        locationPath = locationPath.substring(5);
+      }
+      this.activeUrl = locationPath;
     }
     this.calculateHideChildreBaseOnUrl();
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
