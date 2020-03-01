@@ -50,3 +50,8 @@ thead {
 {
 	color: #00a5e7 !important;
 }
+
+.post-content-mobile img
+{
+    width:100% !important;
+}

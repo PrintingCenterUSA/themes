@@ -23,7 +23,7 @@
             <span class="input-group-addon"><i class="item-icon fa fa-search"></i></span>
             </div>
         </header>
-        <div [innerHTML]="postModel.post.content" class="post-content"></div>
+        <div [innerHTML]="postModel.post.content" class="post-content" [ngClass]="{'post-content-mobile':isMobile}"></div>
 
         <ul *ngIf="postModel.older || postModel.newer" class="pagination justify-content-center" style="display: none;">
           <li *ngIf="postModel.older" class="item item-prev">

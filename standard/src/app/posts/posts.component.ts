@@ -17,9 +17,11 @@ export class PostsComponent implements OnInit {
   errorMessage = '';
   navigationSubscription:any;
   public searchKeyWords:string;
+  isMobile:boolean;
   constructor(private blogService: BlogService, private activeRouter: ActivatedRoute,private router: Router) { }
 
   ngOnInit(): void {
+    this.isMobile = window.screen.width < 576;
     this.blogService.getSettings().subscribe(
       result => { 
         this.blogSettings = result;
