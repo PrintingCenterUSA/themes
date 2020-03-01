@@ -1,17 +1,21 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,EventEmitter, Output } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { ArgumentType } from '@angular/compiler/src/core';
 
 @Component({
-  selector: 'nav-menu-item',
-  templateUrl: './nav-menu-item.component.html',
-  styleUrls: ['./nav-menu-item.component.css']
+  selector: 'nav-menu-item-mobile',
+  templateUrl: './nav-menu-item-mobile.component.html',
+  styleUrls: ['./nav-menu-item-mobile.component.css']
 })
-export class NavMenuItemComponent implements OnInit {
+export class NavMenuItemMobileComponent implements OnInit {
   @Input('data') data: any;
   @Input('level') level:number;
+  @Output()
+  itemSelected: EventEmitter<any> = new EventEmitter();
   hideChildren:boolean;
   navigationSubscription:any;
   activeUrl:string;
+
   constructor(private router: Router) { 
     
   }
@@ -56,6 +60,17 @@ export class NavMenuItemComponent implements OnInit {
   {
     event.stopPropagation();
     this.hideChildren = !this.hideChildren;
+  }
+  itemSelectHandler()
+  {
+    if(this.data.children.length == 0)
+    {
+      this.itemSelected.emit(this.data);
+    }
+  }
+  itemSelectedProxyHandler(event:any)
+  {
+    this.itemSelected.emit(event);
   }
   click(event:any)
   {

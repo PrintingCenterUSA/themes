@@ -1,0 +1,26 @@
+<ul class="nav flex-column" [ngClass]="{'padding-left-10pt':!isRoot}">
+    <li *ngIf="isRoot" class="title">
+        <div>{{currentPageName}}</div>
+        <i (click)="toggle()" class="item-icon fa" [ngClass]="{'fa-angle-right': !open, 'fa-angle-down':open}"></i>
+    </li>
+
+    
+    <div *ngIf="open && isRoot">
+        <li *ngIf="currentPageName != 'Help Center: Home'">
+            <a class="nav-link border-bottom"  [routerLink]="'/page/home'" (click)="gotoHomeHandler()">Help Center: Home</a>
+        </li>
+        <li  *ngFor="let item of data" class="nav-item">
+            <nav-menu-item-mobile (itemSelected)="itemSelectedHandler($event)" [data]=item [level]=level></nav-menu-item-mobile>
+        </li>
+    </div>
+
+    <div *ngIf="!isRoot">
+        <li  *ngFor="let item of data" class="nav-item">
+            <nav-menu-item-mobile (itemSelected)="itemSelectedHandler($event)" [data]=item [level]=level></nav-menu-item-mobile>
+        </li>
+    </div>
+</ul>
+
+
+
+

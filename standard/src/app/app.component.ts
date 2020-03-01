@@ -18,10 +18,11 @@ export class AppComponent implements OnInit {
 	social: object;
 	settings: IBlogSettings;
 	pageCatalog:IPageCatalog;
+	isMobile:boolean;
   
   ngOnInit(): void {
 		this.root = environment.apiEndpoint;
-
+		this.isMobile = window.screen.width < 576;
 		this.blogService.getThemeData().subscribe(
 			result => { this.social = result.socialButtons; }
 		);

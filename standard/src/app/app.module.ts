@@ -20,6 +20,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { NavMenuComponent } from './core/nav-menu/nav-menu.component';
 import { NavMenuItemComponent } from './core/nav-menu-item/nav-menu-item.component';
 import { SearchComponent } from './search/search.component';
+import { NavMenuMobileComponent } from './core/nav-menu-mobile/nav-menu-mobile.component';
+import { NavMenuItemMobileComponent } from './core/nav-menu-item-mobile/nav-menu-item-mobile.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,10 @@ import { SearchComponent } from './search/search.component';
 		SocialbuttonsComponent,
 		SettingsComponent,
     NavMenuComponent,
-    NavMenuItemComponent
+    NavMenuItemComponent,
+    NavMenuMobileComponent,
+    NavMenuItemMobileComponent
+
   ],
   imports: [
     BrowserModule,

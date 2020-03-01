@@ -18,9 +18,12 @@
 
 
 
-<div class="Main-Content">
-  <div class="Catalog-Nav">
+<div class="Main-Content" [ngClass]="{'Main-Content-Mobile':isMobile}">
+  <div *ngIf="!isMobile" class="Catalog-Nav">
     <nav-menu *ngIf="pageCatalog && pageCatalog['children'].length" [level]=1  [data]="pageCatalog['children']"></nav-menu>
+  </div>
+  <div *ngIf="isMobile" class="Catalog-Nav-Mobile">
+    <nav-menu-mobile *ngIf="pageCatalog && pageCatalog['children'].length" [isRoot]=true [level]=1  [data]="pageCatalog['children']"></nav-menu-mobile>
   </div>
   <div class="Right-Container">
     <router-outlet></router-outlet>

@@ -1,0 +1,66 @@
+
+.border-bottom
+{
+    border-bottom:2px solid #00a5e7;
+}
+
+a,.nav-link{
+    color: #00a5e7 !important;
+    cursor: pointer;
+}
+.active
+{
+    font-weight: bold;
+}
+.nav-link > a
+{
+    display: inline;
+    padding-left: 0;
+    flex:1;
+}
+.nav-link
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding:0;
+}
+.nav-link i
+{
+    padding-right: 10pt;
+}
+
+.level-1
+{
+    font-size: 18pt;
+}
+.level-2
+{
+    font-size: 16pt;
+   
+}
+.level-3
+{
+    font-size: 14pt;
+}
+.level-1 > div > .nav-link,.level-1 > a
+{
+    padding-left: 10pt;
+   /* padding-right: 10pt;*/
+    padding-top: 5pt;
+    padding-bottom: 5pt;
+}
+.level-2 > div > .nav-link,.level-2 > a
+{
+    padding-left: 20pt;
+     /*padding-right: 10pt;*/
+    padding-top: 5pt;
+    padding-bottom: 5pt;
+}
+.level-3 > div > .nav-link,.level-3 > a
+{
+    padding-left: 30pt;
+     /*padding-right: 10pt;*/
+    padding-top: 5pt;
+    padding-bottom: 5pt;
+}
