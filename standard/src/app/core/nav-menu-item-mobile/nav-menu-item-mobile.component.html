@@ -1,7 +1,7 @@
 <div [ngClass]="{'level-1':level == 1,'level-2':level == 2,'level-3':level == 3}">
     <a *ngIf="!currentPage && !data.children.length" class="nav-link border-bottom" [ngClass]="{'active':'/'+data.page.url === activeUrl}"  [routerLink]="data.page.url" (click)="itemSelectHandler()">{{data.page.navHeader}}</a>
     <div *ngIf="!currentPage && data.children.length" class="nav-link border-bottom"  (click)="toggle($event)">
-        <a  class="nav-link" [ngClass]="{'active':'/'+data.page.url === activeUrl}">{{data.page.navHeader}}</a>
+        <a  class="nav-link" [ngClass]="{'active':'/'+data.page.url === activeUrl}" [routerLink]="data.page.url">{{data.page.navHeader}}</a>
         <i class="item-icon fa" [ngClass]="{'fa-angle-right': hideChildren, 'fa-angle-down':!hideChildren}"></i>
     </div>
     
