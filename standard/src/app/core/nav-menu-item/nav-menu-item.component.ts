@@ -57,6 +57,22 @@ export class NavMenuItemComponent implements OnInit {
     event.stopPropagation();
     this.hideChildren = !this.hideChildren;
   }
+  parentLinkClickHandler(event):void
+  {
+    event.stopPropagation();
+    if(this.hideChildren)
+    {
+      let routUrl = this.data.children[0].page.url;
+      if(this.data.children[0].children.length > 0)
+      {
+        routUrl = this.data.children[0].children[0].page.url;
+      }
+      this.router.navigate([routUrl])
+    }else{
+      this.hideChildren = true;
+      event.preventDefault();
+    }
+  }
   click(event:any)
   {
     event.stopPropagation();

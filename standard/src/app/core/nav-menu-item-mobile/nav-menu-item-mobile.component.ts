@@ -61,6 +61,23 @@ export class NavMenuItemMobileComponent implements OnInit {
     event.stopPropagation();
     this.hideChildren = !this.hideChildren;
   }
+  parentLinkClickHandler(event):void
+  {
+    event.stopPropagation();
+    if(this.hideChildren)
+    {
+      let postData = this.data.children[0];
+      if(this.data.children[0].children.length > 0)
+      {
+        postData =  this.data.children[0].children[0];
+      }
+      this.router.navigate([postData.page.url]);
+      this.itemSelected.emit(postData);
+    }else{
+      this.hideChildren = true;
+      event.preventDefault();
+    }
+  }
   itemSelectHandler()
   {
     if(this.data.children.length == 0)
