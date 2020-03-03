@@ -1,4 +1,7 @@
 <ul class="nav flex-column" [ngClass]="{'font-level-1':level == 1,'font-level-2':level == 2,'font-level-3':level == 3}"s>
+    <li *ngIf="isRoot">
+        <a class="nav-link border-bottom"  [routerLink]="'/page/home'">Home</a>
+    </li>
     <li *ngFor="let item of data" class="nav-item">
         <nav-menu-item [data]=item [level]=level></nav-menu-item>
     </li>

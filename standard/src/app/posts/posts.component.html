@@ -1,11 +1,11 @@
 <ng-template [ngIf]="postModel">
   <article class="post-single">
-    <div class="post-cover" *ngIf="postCover" [ngStyle]="{'display':'none','background-image':'url('+postCover+')'}"></div>
+    <div class="post-cover" *ngIf="false" [ngStyle]="{'display':'none','background-image':'url('+postCover+')'}"></div>
     <section class="container">
       <div class=" post-body">
         <header class="post-header">
           <h2 class="post-title">{{postModel.post.title}}</h2>
-          <div class="post-meta">
+          <div *ngIf="false" class="post-meta">
             <a href="?author={{postModel.post.author.appUserName}}">
               <img class="post-meta-img" src="{{avatarImg}}" alt="{{postModel.post.author.displayName}}" />
               <span class="post-meta-author">{{postModel.post.author.displayName}}</span>

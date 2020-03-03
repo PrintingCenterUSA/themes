@@ -9,6 +9,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 export class NavMenuComponent implements OnInit {
   @Input('data') data: Array<Object>;
   @Input('level') level:number;
+  @Input('isRoot') isRoot:boolean;
   navigationSubscription:any;
   activeUrl:string;
   constructor(private router: Router) { 

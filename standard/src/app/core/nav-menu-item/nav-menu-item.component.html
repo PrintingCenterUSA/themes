@@ -10,5 +10,5 @@
     <i class="item-icon fa" [ngClass]="{'fa-angle-right': hideChildren, 'fa-angle-down':!hideChildren}"></i>
 </div>
 
-<nav-menu *ngIf="!hideChildren && data.children.length" [level]="level+1" [data]="data.children" ></nav-menu>
+<nav-menu *ngIf="!hideChildren && data.children.length" [isRoot]=false [level]="level+1" [data]="data.children" ></nav-menu>
 

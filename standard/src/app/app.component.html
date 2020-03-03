@@ -20,7 +20,7 @@
 
 <div class="Main-Content" [ngClass]="{'Main-Content-Mobile':isMobile}">
   <div *ngIf="!isMobile" class="Catalog-Nav">
-    <nav-menu *ngIf="pageCatalog && pageCatalog['children'].length" [level]=1  [data]="pageCatalog['children']"></nav-menu>
+    <nav-menu *ngIf="pageCatalog && pageCatalog['children'].length" [isRoot]=true [level]=1  [data]="pageCatalog['children']"></nav-menu>
   </div>
   <div *ngIf="isMobile" class="Catalog-Nav-Mobile">
     <nav-menu-mobile *ngIf="pageCatalog && pageCatalog['children'].length" [isRoot]=true [level]=1  [data]="pageCatalog['children']"></nav-menu-mobile>
