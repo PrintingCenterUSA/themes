@@ -22,16 +22,16 @@ export class BlogService {
 
 	securityObject: AppUserAuth = new AppUserAuth();
 
-	getPosts(): Observable<IPostList> {
+	getPosts(searchKeyWords?:string): Observable<IPostList> {
 		var postsUrl = environment.apiEndpoint + '/api/posts?include=FP&page=1';
 		var searchUrl = environment.apiEndpoint + '/api/posts/front-search/';
 
 		var page = this.route.snapshot.queryParamMap.get('page');
 		var author = this.route.snapshot.queryParamMap.get('author');
 		var category = this.route.snapshot.queryParamMap.get('category');
-		var term = this.route.snapshot.queryParamMap.get('term');
-		var pageId = this.route.snapshot.queryParamMap.get('pageId');
-		var pageUrl = this.route.snapshot.queryParamMap.get('pageUrl');
+		var term = searchKeyWords?searchKeyWords:this.route.snapshot.queryParamMap.get('term');
+		//var pageId = this.route.snapshot.queryParamMap.get('pageId');
+		//var pageUrl = this.route.snapshot.queryParamMap.get('pageUrl');
 		if (page) {
 			postsUrl = environment.apiEndpoint + '/api/posts?include=FP&page=' + page;
 		}
@@ -43,17 +43,8 @@ export class BlogService {
 		if (category) {
 			postsUrl += '&category=' + category;
 		}
-
-		//Search in Home page, search all posts
-		if(pageUrl === "page/home")
-		{
+		 if (term) {
 			return this.http.get<IPostList>(searchUrl + term).pipe(
-				//tap(data => this.logMessage('Search: ' + JSON.stringify(data))),
-				catchError(this.handleError)
-			);
-		}
-		else if (term) {
-			return this.http.get<IPostList>(searchUrl + term+"?currentPageId="+pageId).pipe(
 			//	tap(data => this.logMessage('Search: ' + JSON.stringify(data))),
 				catchError(this.handleError)
 			);

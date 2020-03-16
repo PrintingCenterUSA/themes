@@ -3,6 +3,13 @@
     <div class="post-cover" *ngIf="false" [ngStyle]="{'display':'none','background-image':'url('+postCover+')'}"></div>
     <section class="container">
       <div class=" post-body">
+        <div class="top-search">
+            <div class="input-group">
+              <input type="text" class="form-control"  [(ngModel)]="searchKeyWords" (keyup.enter)="onSearchEnter($event)"/>
+              <span class="input-group-addon"><i class="item-icon fa fa-search"></i></span>
+            </div>  
+        </div>
+       
         <header class="post-header">
           <h2 class="post-title">{{postModel.post.title}}</h2>
           <div *ngIf="false" class="post-meta">
@@ -18,10 +25,6 @@
               </span>
             </ng-template>
           </div>
-          <div *ngIf="showSearch" class="input-group">
-            <input type="text" class="form-control"  [(ngModel)]="searchKeyWords" (keyup.enter)="onSearchEnter($event)"/>
-            <span class="input-group-addon"><i class="item-icon fa fa-search"></i></span>
-            </div>
         </header>
         <div [innerHTML]="postModel.post.content" class="post-content" [ngClass]="{'post-content-mobile':isMobile}"></div>
 

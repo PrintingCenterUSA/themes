@@ -1,18 +1,18 @@
 <ng-template [ngIf]="true">
 		<div class="page-content">
+			<div class="container top-search">
+				<div class="input-group">
+					<input type="text" class="form-control"  [(ngModel)]="searchKeyWords" (keyup.enter)="onSearchEnter($event)"/>
+					<span class="input-group-addon"><i class="item-icon fa fa-search"></i></span>
+				</div>
+				<div class="top-search-summary-result">{{postList === undefined ?0: postList.posts.length}} results for "{{searchKeyWords}}"</div>
+			</div>
+
 			<div *ngIf="postList" class="container">
 					<article *ngFor="let post of postList.posts" class="post">
-						<div class="post-cover">
-							<img src="{{apiRoot}}{{post.cover}}" alt="post.title">
-							<span *ngIf="post.featured" class="post-featrued-label"><i class="fa fa-star"></i> Featured</span>
-						</div>
-						<h2 class="post-title"><a [routerLink]="'/page/'+post.slug">{{post.title}}</a></h2>
-						<div class="post-meta">
-							<a class="post-meta-author" href="?author={{post.author.appUserName}}">{{post.author.displayName}}</a>
-							<time class="post-meta-time">/ {{toDate(post.published)}}</time>
-						</div>
+						<h2 class="post-title"><a [routerLink]="post.url">{{post.title}}</a></h2>
 						<div [innerHTML]="post.description" class="post-description"></div>
-						<a class="post-more btn btn-rounded btn-dark" [routerLink]="'/page/'+post.slug">Read</a>
+						<a class="post-more btn btn-rounded btn-dark" [routerLink]="post.url">Read</a>
 					</article>
 			</div>
 			<div *ngIf="postList && postList.posts.length == 0" class="search-noresult">

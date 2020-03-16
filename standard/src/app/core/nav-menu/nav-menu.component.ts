@@ -16,12 +16,25 @@ export class NavMenuComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(!this.activeUrl)
+    {
+      var locationPath = location.pathname;
+      if(locationPath.indexOf("/help") === 0 && locationPath != '/help')
+      {
+        locationPath = locationPath.substring(5);
+      }
+      this.activeUrl = locationPath;
+    }
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
         this.activeUrl = e.url;
       }
     });
+  }
+  get isHome()
+  {
+    return this.activeUrl.indexOf("page/home") != -1;
   }
   ngOnDestroy() {
     if (this.navigationSubscription) {

@@ -91,7 +91,7 @@ export class PostsComponent implements OnInit {
   }
   onSearchEnter(event:any):void
   {
-    this.router.navigateByUrl("/search?term="+this.searchKeyWords+"&pageId="+this.postModel.post.id+"&pageUrl="+this.pageUrl);
+    this.router.navigateByUrl("/search?term="+this.searchKeyWords);
   }
   get showSearch():boolean
   {

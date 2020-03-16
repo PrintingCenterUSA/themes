@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService, IBlogSettings, IPostList } from '../core/blog.service';
 import { environment } from '../../environments/environment';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { debug } from 'util';
 
 @Component({
 	selector: 'app-search',
-	templateUrl: './search.component.html'
+	templateUrl: './search.component.html',
+	styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
 	public blogSettings: IBlogSettings;
@@ -14,21 +16,44 @@ export class SearchComponent implements OnInit {
 	public apiRoot: string;
 	errorMessage = '';
 	public emailModel: string;
-
-	constructor(private blogService: BlogService,private router: Router) { }
+	public searchKeyWords:string;
+	private urlPageId:any;
+	constructor(private blogService: BlogService,private router: Router,private route: ActivatedRoute) { }
 
 	ngOnInit(): void {
+		this.urlPageId =  JSON.parse(sessionStorage.getItem("urlPageId"));
 		this.emailModel = '';
 		this.apiRoot = environment.apiEndpoint + '/';
+		this.searchKeyWords = this.route.snapshot.queryParamMap.get('term');
 		this.blogService.getSettings().subscribe(
 			result => {
+
 				this.blogSettings = result;
 				this.blogCover = environment.apiEndpoint + '/' + this.blogSettings.cover;
 			},
 			error => this.errorMessage = <any>error
 		);
-		this.blogService.getPosts().subscribe(
+			this.reloadData();
+	}
+	getPostUrlById(postId):string
+	{
+		let url:string = "";
+		 for(var key in this.urlPageId)
+		 {
+			if(this.urlPageId[key] == postId){
+				url = '/'+key;
+				break;
+			}
+		 }
+		return url;
+	}
+	reloadData():void
+	{
+		this.blogService.getPosts(this.searchKeyWords).subscribe(
 			result => { 
+				result.posts.forEach(element => {
+					element.url = this.getPostUrlById(element.id);
+				});
 				this.postList = result; 
 				if(this.postList.posts.length === 0)
 				{
@@ -39,6 +64,7 @@ export class SearchComponent implements OnInit {
 			},
 			error => this.errorMessage = <any>error
 		);
+	
 	}
 
 	
@@ -114,6 +140,10 @@ export class SearchComponent implements OnInit {
 			elem.style.display = "none";
 			elem.style.visibility = "hidden";
 		}
+	}
+	onSearchEnter(event:any):void
+	{
+		this.reloadData();
 	}
 
 }
