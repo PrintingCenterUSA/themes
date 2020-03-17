@@ -1,7 +1,7 @@
 <ul class="nav flex-column" [ngClass]="{'padding-left-10pt':!isRoot}">
-    <li *ngIf="isRoot" class="title">
+    <li *ngIf="isRoot" class="title" (click)="toggle()">
         <div>{{currentPageName}}</div>
-        <i (click)="toggle()" class="item-icon fa" [ngClass]="{'fa-angle-right': !open, 'fa-angle-down':open}"></i>
+        <i  class="item-icon fa" [ngClass]="{'fa-angle-right': !open, 'fa-angle-down':open}"></i>
     </li>
 
     
