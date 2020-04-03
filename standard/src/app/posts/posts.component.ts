@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { environment } from '../../environments/environment';
 
 import { BlogService, IBlogSettings, IPostModel } from '../core/blog.service';
+import { EmitService } from '../service/EmitService';
 
 @Component({
   selector: 'app-posts',
@@ -18,7 +19,8 @@ export class PostsComponent implements OnInit {
   navigationSubscription:any;
   public searchKeyWords:string;
   isMobile:boolean;
-  constructor(private blogService: BlogService, private activeRouter: ActivatedRoute,private router: Router) { }
+  isNeedLoadDataAfterCatalogDataReady:boolean = false;
+  constructor(private blogService: BlogService, private activeRouter: ActivatedRoute,private router: Router,public emitService: EmitService) { }
 
   ngOnInit(): void {
     this.isMobile = window.screen.width < 576;
@@ -35,6 +37,14 @@ export class PostsComponent implements OnInit {
         this.loadPageData();
       }
     });
+    this.emitService.eventEmit.subscribe((value: any) => {
+      if(value == "nav_catalog_data_ready") {
+          if(this.isNeedLoadDataAfterCatalogDataReady)
+          {
+            this.loadPageData();
+          }
+      }
+   });
     this.loadPageData();  
     
   }
@@ -59,27 +69,33 @@ export class PostsComponent implements OnInit {
         error => this.errorMessage = <any>error
       );
     }else{
-      var postId = this.slupostId;
-      if(postId){
-        this.blogService.getPost(postId).subscribe(
-          result => { 
-            this.postModel = result;
-            this.postCover = environment.apiEndpoint + '/' + this.postModel.post.cover;
-            this.avatarImg = environment.apiEndpoint + '/' + this.postModel.post.author.avatar;
-            setTimeout(() => {
-              //Run in IFrame
-              if(window.parent != window)
-              {
-                window.parent.scrollTo(0,0);
-              }else{
-                window.scrollTo(0,0);
-              }
-             
-            }, 500);
-          },
-          error => this.errorMessage = <any>error
-        );
+      if(!sessionStorage.getItem("urlPageId"))
+      {
+        this.isNeedLoadDataAfterCatalogDataReady = true;
+      }else{
+        var postId = this.slupostId;
+        if(postId){
+          this.blogService.getPost(postId).subscribe(
+            result => { 
+              this.postModel = result;
+              this.postCover = environment.apiEndpoint + '/' + this.postModel.post.cover;
+              this.avatarImg = environment.apiEndpoint + '/' + this.postModel.post.author.avatar;
+              setTimeout(() => {
+                //Run in IFrame
+                if(window.parent != window)
+                {
+                  window.parent.scrollTo(0,0);
+                }else{
+                  window.scrollTo(0,0);
+                }
+               
+              }, 500);
+            },
+            error => this.errorMessage = <any>error
+          );
+        }
       }
+     
     } 
   }
 

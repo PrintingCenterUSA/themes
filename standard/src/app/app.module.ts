@@ -22,6 +22,7 @@ import { NavMenuItemComponent } from './core/nav-menu-item/nav-menu-item.compone
 import { SearchComponent } from './search/search.component';
 import { NavMenuMobileComponent } from './core/nav-menu-mobile/nav-menu-mobile.component';
 import { NavMenuItemMobileComponent } from './core/nav-menu-item-mobile/nav-menu-item-mobile.component';
+import { EmitService } from './service/EmitService';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { NavMenuItemMobileComponent } from './core/nav-menu-item-mobile/nav-menu
     HttpClientModule,
     FormsModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,EmitService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

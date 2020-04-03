@@ -3,6 +3,7 @@ import { BlogService, IBlogSettings, IPager, IPageCatalog } from './core/blog.se
 import { environment } from '../environments/environment';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EmitService } from './service/EmitService';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-	constructor(private blogService: BlogService,private router: Router) { }
+	constructor(private blogService: BlogService,private router: Router,public emitService: EmitService) { }
 
 	title = 'standard';
 	root: string;
@@ -46,7 +47,7 @@ export class AppComponent implements OnInit {
 				sessionStorage.setItem('nav_catalog_data',JSON.stringify(result));
 				this.pageCatalog = result; 
 				this.refreshPageCatalogSessionData();
-				
+				this.emitService.eventEmit.emit("nav_catalog_data_ready");
 				//Redirect to the home page				
 				if(window.location.pathname.indexOf("page/") == -1 && window.location.pathname.indexOf("search") == -1 )
 				{
